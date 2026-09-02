@@ -5,6 +5,9 @@
 // Copyright (c) 2021 Scala
 //
 // Please see the included LICENSE file for more information.
+// Copyright (c) 2024 Tari
+//
+// Please see the included LICENSE file for more information.
 
 package io.scalaproject.androidminer;
 
@@ -23,8 +26,8 @@ public class Config {
 
     public static final int MAX_WORKERNAME_TITLE_CHARS = 25;
 
-    public static final String URL_CHANGELOG_DIRECTORY = "https://raw.githubusercontent.com/scala-network/MobileMiner/master/fastlane/metadata/android/en-US/changelog/";
-    public static final String URL_RELEASES = "https://github.com/scala-network/MobileMiner/releases";
+    public static final String URL_CHANGELOG_DIRECTORY = "https://raw.githubusercontent.com/DeepFriedBlockchains/TariMobileMiner/master/fastlane/metadata/android/en-US/changelog/";
+    public static final String URL_RELEASES = "https://github.com/DeepFriedBlockchains/TariMobileMiner/releases";
 
     public final static String[] SUPPORTED_ARCHITECTURES = {"arm64-v8a", "armeabi-v7a", "x86_64"};
 
@@ -70,8 +73,8 @@ public class Config {
     public final static int DefaultCooldownTheshold = 10; // 5,10,15,20,25
 
     public static final Long statsDelay = 30000L;
-    public static final String miner_xlarig = "xlarig";
-    static final String algo = "panthera";
+    public static final String miner_xlarig = "tarixminer";
+    static final String algo = "tarix";
 
     public static final String CONFIG_KEY_CONFIG_VERSION = "config_version";
     public static final String version = "4";

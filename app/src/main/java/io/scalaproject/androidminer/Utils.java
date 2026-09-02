@@ -1,4 +1,5 @@
 // Copyright (c) 2021 Scala
+// Copyright (c) 2024 Tari
 //
 // Please see the included LICENSE file for more information.
 
@@ -65,13 +66,14 @@ public final class Utils {
     static public final Integer MIN_BATTERY_TEMP = 30;
     static public final Integer MIN_COOLDOWN = 5;
 
-    static public final String SCALA_BTC_ADDRESS = "1XTLY5LqdBXRW6hcHtnuMU7c68mAyW6qm";
-    static public final String SCALA_ETH_ADDRESS = "0x133a15dF7177823Dd407ca87A190bbE4585a379e";
-    static public final String SCALA_XLA_ADDRESS = "SvkFLjR4DST5bAG8SSHWfta4MsCzRrDEPNx72cTetqcoPfkwi7cFA2sYGG2Tf51rQ9EMSPHVuzxeoS4Y7ieicg5A1M24A8TTW";
-    static public final String SCALA_LTC_ADDRESS = "LeLK5hopvfArVyKtkZBzF3B5wj6rGrNUGk";
+    // Tari wallet addresses for donations
+    static public final String TARI_XTM_ADDRESS = "";
+    static public final String TARI_BTC_ADDRESS = "";
+    static public final String TARI_ETH_ADDRESS = "";
 
-    static public final String ADDRESS_REGEX_MAIN = "^S+([1-9A-HJ-NP-Za-km-z]{96})$";
-    static public final String ADDRESS_REGEX_SUB = "^Ss+([1-9A-HJ-NP-Za-km-z]{96})$";
+    // Tari address regex patterns
+    static public final String ADDRESS_REGEX_MAIN = "^[a-z0-9]{64,}$";
+    static public final String ADDRESS_REGEX_SUB = "^[a-z0-9]{64,}$";
 
     static public boolean verifyAddress(String input) {
         Pattern p = Pattern.compile(Utils.ADDRESS_REGEX_MAIN);
