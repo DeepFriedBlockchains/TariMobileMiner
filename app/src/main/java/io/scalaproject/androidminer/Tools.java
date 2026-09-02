@@ -1,26 +1,11 @@
-/*
- *  Monero Miner App (c) 2018 Uwe Post
- *  based on the XMRig Monero Miner https://github.com/xmrig/xmrig
- *
- *    This program is free software: you can redistribute it and/or modify
- *    it under the terms of the GNU General Public License as published by
- *    the Free Software Foundation, either version 3 of the License, or
- *    (at your option) any later version.
- *
- *    This program is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- *    GNU General Public License for more details.
- *
- *    You should have received a copy of the GNU General Public License
- *    along with this program. If not, see <http://www.gnu.org/licenses/>.
- * /
- */
 // Copyright (c) 2019, Mine2Gether.com
 //
 // Please see the included LICENSE file for more information.
 //
 // Copyright (c) 2021 Scala
+//
+// Please see the included LICENSE file for more information.
+// Copyright (c) 2024 Tari
 //
 // Please see the included LICENSE file for more information.
 
@@ -273,8 +258,6 @@ public class Tools {
         return Build.SUPPORTED_ABIS[0].toLowerCase().trim();
     }
 
-    //private static String cachedSysFile = null;
-
     static private final String[] CPU_TEMP_SYS_FILE = {
             "/sys/devices/virtual/thermal/thermal_zone0/temp",
             "/sys/devices/system/cpu/cpu0/cpufreq/cpu_temp",
@@ -295,7 +278,7 @@ public class Tools {
             "/sys/devices/platform/tegra-tsensor/tsensor_temperature",
             "/sys/devices/system/cpu/cpu0/cpufreq/cpu_temp",
             "/sys/devices/system/cpu/cpu0/cpufreq/FakeShmoo_cpu_temp",
-            "/sys/devices/virtual/hwmon/hwmon1/temp1_input", //Nokia N1, sensor name in 'sensor'
+            "/sys/devices/virtual/hwmon/hwmon1/temp1_input",
             "/sys/devices/platform/s5p-tmu/curr_temp",
             "/sys/devices/platform/s5p-tmu/temperature",
             "/sys/class/thermal/thermal_zone3/temp",
@@ -305,12 +288,10 @@ public class Tools {
     };
 
     public static float getCurrentCPUTemperature() {
-        // 1. Try dynamic detection
         float temp = getDynamicCpuTemperature();
         if (temp > 0f)
             return temp;
 
-        // 2. Try fallback hardcoded paths
         temp = getFallbackCpuTemperature();
         if (temp > 0f)
             return temp;
@@ -329,7 +310,6 @@ public class Tools {
                 if (type != null && (type.toLowerCase().contains("cpu") || type.toLowerCase().contains("soc"))) {
                     float temp = readTemperature(new File(zone, "temp"));
                     if (temp > 0f && temp < 100f) {
-                        //cachedSysFile = new File(zone, "temp").getAbsolutePath();
                         return temp;
                     }
                 }
@@ -344,7 +324,6 @@ public class Tools {
         for (String path : CPU_TEMP_SYS_FILE) {
             float temp = readTemperature(new File(path));
             if (temp > 0f && temp < 100f) {
-                //cachedSysFile = path;
                 return temp;
             }
         }
@@ -369,71 +348,6 @@ public class Tools {
         br.close();
         return line;
     }
-
-
-
-
-
-
-
-    /*static private String sCPUTempSysFile = "";
-
-    static float getCurrentCPUTemperature2() {
-        if (sCPUTempSysFile.isEmpty())
-            return getCPUTempSysFile();
-
-        // No CPU temperature sensor
-        if (sCPUTempSysFile.equals("err"))
-            return 0.0f;
-
-        return getCPUTempFromFile(sCPUTempSysFile);
-    }
-
-    static float getCPUTempFromFile(String sFile) {
-        float output = 0.0f;
-
-        RandomAccessFile reader;
-        String line;
-
-        try {
-            reader = new RandomAccessFile(sFile, "r");
-            line = reader.readLine();
-
-            if (line != null) {
-                output = Float.parseFloat(line);
-
-                if (output > 1000.0f && Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-                    output /= 1000.0f;
-                }
-
-                if(output > 100.0f) { // error while reading file
-                    sCPUTempSysFile = "";
-                    return 0.0f;
-                }
-            }
-        } catch (IOException e) {
-            sCPUTempSysFile = "";
-            e.printStackTrace();
-            return 0.0f;
-        }
-
-        return output;
-    }
-
-    static float getCPUTempSysFile() {
-        float output;
-        for (String sysFile : CPU_TEMP_SYS_FILE) {
-            output = getCPUTempFromFile(sysFile);
-
-            if (output > 0.0f && output < 100.0f) { // ugly temporary workaround
-                sCPUTempSysFile = sysFile;
-                return output;
-            }
-        }
-
-        sCPUTempSysFile = "err";
-        return 0.0f;
-    }*/
 
     static public String parseCurrency(String value, long coinUnits, long denominationUnits, String symbol) {
         double d2 = parseCurrencyFloat(value, coinUnits, denominationUnits);
